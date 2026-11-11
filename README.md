@@ -15,7 +15,7 @@ Download the latest macOS build from [Releases](https://github.com/jinkun1998/an
 
 - **macOS (Apple Silicon):** `.dmg` (macOS 13+). Drag `anotherMessenger.app` to `Applications`. Not notarized yet: right-click the app and choose **Open** on first launch.
 
-Windows and Intel macOS builds are planned.
+Intel macOS builds are planned.
 
 ---
 
