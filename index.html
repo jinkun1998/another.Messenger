@@ -1,0 +1,534 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <meta name="description" content="anotherMessenger is a lightweight multi-service chat client for macOS with isolated accounts, Touch ID lock, and 718+ service presets.">
+  <link rel="canonical" href="https://jinkun1998.github.io/another.Messenger/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="anotherMessenger - All your chats in one app">
+  <meta property="og:description" content="Isolated accounts, Touch ID lock, and 718+ service presets in a native macOS shell.">
+  <meta property="og:url" content="https://jinkun1998.github.io/another.Messenger/">
+  <meta property="og:image" content="https://jinkun1998.github.io/another.Messenger/assets/app-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>anotherMessenger - All your chats in one app</title>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"SoftwareApplication","name":"anotherMessenger","applicationCategory":"CommunicationApplication","operatingSystem":"macOS","description":"Lightweight multi-service chat client with isolated accounts and Touch ID lock.","downloadUrl":"https://github.com/jinkun1998/another.Messenger/releases/latest","codeRepository":"https://github.com/jinkun1998/another.Messenger"}
+  </script>
+  <style>
+        :root {
+      --accent-green: #0a84ff;
+      --accent-cyan: #bf5af2;
+      --apple-blue: #64d2ff;
+      --surface: #1d1d1f;
+      --surface-glass: rgba(29, 29, 31, 0.72);
+      --stroke: rgba(255, 255, 255, 0.12);
+      color-scheme: dark;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      background: #000;
+      color: #f5f5f7;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: #000;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      overflow-x: hidden;
+    }
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--apple-blue); outline-offset: 4px; }
+    .text-link { color: inherit; text-decoration: none; }
+    .text-link:hover { color: #fff; }
+
+    /* Ambient atmospheric background */
+    .ambient-glow {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      width: 140vw;
+      height: 100vh;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% -10%, rgba(10, 132, 255, 0.18), transparent 70%),
+        radial-gradient(ellipse 45% 40% at 75% 20%, rgba(41, 151, 255, 0.14), transparent 60%),
+        radial-gradient(ellipse 40% 35% at 25% 30%, rgba(191, 90, 242, 0.10), transparent 60%);
+      opacity: var(--background-fade-opacity, 0.9);
+      transition: opacity 0.3s ease;
+    }
+    .grid-lines {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(circle at 50% 30%, black 20%, transparent 80%);
+      -webkit-mask-image: radial-gradient(circle at 50% 30%, black 20%, transparent 80%);
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      display: grid;
+      min-height: 100svh;
+      place-items: center;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 32px, 780px);
+      padding: 48px 0 64px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 0 0 22px;
+      padding: 6px 12px 6px 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 1px rgba(255, 255, 255, 0.15);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      line-height: 1;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    }
+    .eyebrow:hover {
+      box-shadow: 0 8px 28px rgba(10, 132, 255, 0.25), 0 0 16px rgba(10, 132, 255, 0.2);
+      border-color: rgba(10, 132, 255, 0.4);
+      transform: translateY(-1px);
+    }
+    .eyebrow-logo {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      display: block;
+    }
+    .eyebrow strong {
+      padding-left: 8px;
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent-green);
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 0;
+      font-size: clamp(48px, 9vw, 92px);
+      font-weight: 700;
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      background: linear-gradient(180deg, #ffffff 40%, rgba(255, 255, 255, 0.65));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .lede {
+      max-width: 620px;
+      margin: 22px auto 36px;
+      color: #a1a1a6;
+      font-size: clamp(18px, 2.2vw, 21px);
+      line-height: 1.45;
+    }
+    .lede strong {
+      color: #f5f5f7;
+      font-weight: 600;
+    }
+    .actions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .button, .github-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05) 55%, rgba(255, 255, 255, 0.12));
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), inset 0 -1px rgba(255, 255, 255, 0.08), 0 8px 24px rgba(0, 0, 0, 0.4);
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      backdrop-filter: blur(20px) saturate(180%);
+    }
+    .button { padding: 12px 22px; font-size: 15px; }
+    .button.primary {
+      border-color: rgba(10, 132, 255, 0.7);
+      background: linear-gradient(135deg, #0a84ff, #0066d6 60%, #004fa8);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.6), inset 0 -1px rgba(0, 0, 0, 0.3), 0 10px 28px rgba(10, 132, 255, 0.35);
+      color: #000;
+      font-weight: 700;
+    }
+    .button.primary:hover {
+      background: linear-gradient(135deg, #4da3ff, #2b8cff 60%, #0a5fc4);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.8), 0 12px 34px rgba(10, 132, 255, 0.5);
+      transform: scale(1.02);
+    }
+    .github-link {
+      width: 112px;
+      gap: 8px;
+      font-size: 14px;
+    }
+    .github-link svg { width: 19px; height: 19px; fill: currentColor; }
+    .button:hover, .github-link:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.26), rgba(255, 255, 255, 0.08) 55%, rgba(255, 255, 255, 0.18));
+      transform: scale(1.02);
+    }
+    .release-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      color: var(--apple-blue);
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .release-badge:hover { text-decoration: underline; }
+    .version-tag {
+      background: rgba(41, 151, 255, 0.15);
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-weight: 600;
+      color: var(--apple-blue);
+    }
+
+    /* Scroll toggle link */
+    .scroll-link {
+      position: absolute;
+      z-index: 1;
+      bottom: 24px;
+      left: 50%;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transform: translateX(-50%);
+      color: #a1a1a6;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .scroll-link::after { content: "↓"; font-size: 18px; }
+    .scroll-link:hover { transform: translate(-50%, -2px); color: var(--accent-green); }
+    html.scrolled .scroll-link {
+      position: fixed;
+      z-index: 3;
+      top: 24px;
+      bottom: auto;
+      background: rgba(0, 0, 0, 0.75);
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    }
+    html.scrolled .scroll-link::after { content: "↑"; }
+    /* Downloads Grid Section */
+    .downloads-section {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 40px, 1140px);
+      margin: 40px auto 80px;
+      padding-top: 40px;
+    }
+    .downloads-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .downloads-header h2 {
+      font-size: clamp(32px, 5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      margin-bottom: 10px;
+    }
+    .downloads-header p {
+      color: #86868b;
+      font-size: 18px;
+    }
+    .platform-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 760px; margin: 0 auto; }
+    .platform-card {
+      position: relative;
+      padding: 32px 28px;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(29, 29, 31, 0.65));
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.2), 0 20px 48px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .platform-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(10, 132, 255, 0.4);
+      box-shadow: inset 0 1px rgba(255, 255, 255, 0.3), 0 24px 60px rgba(10, 132, 255, 0.15);
+    }
+    .platform-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    .platform-icon svg {
+      width: 26px;
+      height: 26px;
+      fill: #fff;
+    }
+    .platform-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .platform-desc {
+      color: #86868b;
+      font-size: 14px;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+    .download-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
+    }
+    .download-link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+    .download-link-btn:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.28);
+    }
+    .download-link-btn.highlight {
+      background: rgba(10, 132, 255, 0.12);
+      border-color: rgba(10, 132, 255, 0.4);
+      color: var(--accent-green);
+    }
+    .download-link-btn.highlight:hover {
+      background: rgba(10, 132, 255, 0.22);
+    }
+    .download-meta {
+      font-size: 11px;
+      font-weight: 500;
+      color: #86868b;
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      width: min(100% - 40px, 1140px);
+      margin: 0 auto;
+      padding: 36px 0 54px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 13px;
+      color: #86868b;
+    }
+    footer a {
+      color: #a1a1a6;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    footer a:hover { color: #fff; }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .platform-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 760px) {
+      .hero-content { width: min(100% - 28px, 620px); }
+      .features { width: min(100% - 28px, 1140px); padding: 24px 0; }
+      .feature-slide { grid-template-columns: 1fr; min-height: 0; }
+      .feature-copy { order: -1; }
+      .carousel-control { top: auto; bottom: 20px; transform: none; }
+      .carousel-control.previous { left: 20px; }
+      .carousel-control.next { right: 20px; }
+      .carousel-footer { min-height: 64px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .hero-content { padding-bottom: 72px; }
+      h1 { font-size: clamp(42px, 13vw, 56px); }
+      .lede { margin: 16px auto 24px; font-size: 16px; }
+      .button { padding: 12px 18px; }
+      .github-link { width: 104px; min-height: 46px; }
+      .feature-carousel { border-radius: 22px; }
+      .feature-slide { gap: 24px; padding: 22px 18px 76px; }
+      .feature-copy p { font-size: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+    .features { position: relative; z-index: 1; width: min(100% - 40px, 1140px); margin: 0 auto; padding: 64px 0; }
+    .features-header { text-align: center; margin-bottom: 32px; }
+    .features-header h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 700; letter-spacing: -0.04em; margin-bottom: 8px; }
+    .features-header p { color: #86868b; font-size: 17px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .feature-card { padding: 28px 24px; border-radius: 24px; border: 1px solid rgba(255,255,255,.16); background: linear-gradient(145deg, rgba(255,255,255,.08), rgba(29,29,31,.65)); box-shadow: inset 0 1px rgba(255,255,255,.2), 0 20px 48px rgba(0,0,0,.5); backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%); transition: transform .2s ease, border-color .2s ease; }
+    .feature-card:hover { transform: translateY(-4px); border-color: rgba(10,132,255,.45); }
+    .feature-card h3 { font-size: 20px; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .feature-card p { color: #a1a1a6; font-size: 15px; line-height: 1.5; margin: 0; }
+    .feature-card .tag { display: inline-block; margin-top: 14px; padding: 4px 10px; border-radius: 8px; background: rgba(10,132,255,.12); border: 1px solid rgba(10,132,255,.25); color: var(--accent-green); font-size: 12px; font-weight: 600; }
+    @media (max-width: 900px) { .feature-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .feature-grid { grid-template-columns: 1fr; } }
+
+  </style>
+</head>
+<body>
+  <div class="ambient-glow" aria-hidden="true"></div>
+  <div class="grid-lines" aria-hidden="true"></div>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-content">
+        <p class="eyebrow">
+          <img class="eyebrow-logo" src="assets/app-logo.png" alt="anotherMessenger icon" />
+          <span>macOS</span>
+          <strong>Beta</strong>
+        </p>
+        <h1 id="hero-title">anotherMessenger</h1>
+        <p class="lede">
+          All your chats in one native app.<br>
+          <strong>Isolated accounts</strong>, <strong>Touch ID lock</strong>, and <strong>718+ services</strong> in a lightweight shell.
+        </p>
+        <div class="actions">
+          <a id="primary-download-btn" class="button primary" href="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta3/anotherMessenger_1.0.0-beta3_aarch64.dmg"><span>Download for macOS (.dmg)</span></a>
+          <a class="github-link" href="https://github.com/jinkun1998/another.Messenger" target="_blank" rel="noopener" aria-label="anotherMessenger on GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .7a11.3 11.3 0 0 0-3.6 22c.6.1.8-.3.8-.6v-2.2c-3.4.8-4.1-1.4-4.1-1.4-.6-1.4-1.3-1.8-1.3-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.4 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.6-1.4-5.6-6a4.7 4.7 0 0 1 1.2-3.2c-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.9.1 3.2a4.7 4.7 0 0 1 1.2 3.2c0 4.7-2.9 5.7-5.6 6 .4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.3 11.3 0 0 0 12 .7Z"/></svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+        <div>
+          <a class="release-badge" id="release-badge" href="https://github.com/jinkun1998/another.Messenger/releases/tag/v1.0.0-beta3" target="_blank" rel="noopener">
+            <span class="version-tag" id="version-tag">v1.0.0-beta3</span>
+            <span>View Release Notes &rarr;</span>
+          </a>
+        </div>
+      </div>
+      <a class="scroll-link" href="#features">Explore features</a>
+    </section>
+
+    <section class="features" id="features" aria-label="Features">
+      <div class="features-header">
+        <h2>One shell for every conversation</h2>
+        <p>Less tab juggling. Less memory. Nothing mixed between accounts.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card"><h3>Every chat, one window</h3><p>718+ service presets imported from Rambox, plus custom apps. Messenger, WhatsApp, Telegram, Zalo, Instagram, Discord and more.</p><span class="tag">718+ services</span></article>
+        <article class="feature-card"><h3>Isolated accounts</h3><p>Each service instance gets its own WebKit data store. Run two Messenger accounts side by side with separate sessions.</p><span class="tag">Separate data per service</span></article>
+        <article class="feature-card"><h3>Touch ID lock</h3><p>Native macOS biometric unlock with a master password, auto-lock timer, and a custom lock screen.</p><span class="tag">Supporter feature</span></article>
+        <article class="feature-card"><h3>Tablet and foldable layout</h3><p>Responsive split-view CSS keeps the conversation list and thread side by side on wide or foldable screens.</p><span class="tag">Split-view</span></article>
+        <article class="feature-card"><h3>Vietnamese IME safe</h3><p>No doubled characters or lost accents with EVKey, OpenKey, or Laban Key.</p><span class="tag">EVKey / OpenKey</span></article>
+        <article class="feature-card"><h3>Native macOS feel</h3><p>Liquid Glass window, Dock badge, native notifications, Do Not Disturb, and Sparkle auto-updates.</p><span class="tag">Tauri v2, low RAM</span></article>
+      </div>
+    </section>
+
+    <section class="downloads-section" id="downloads" aria-label="Downloads">
+      <div class="downloads-header">
+        <h2>Download anotherMessenger</h2>
+        <p>Free tier includes 2 services. Supporter license unlocks the rest.</p>
+      </div>
+      <div class="platform-grid">
+        <div class="platform-card" id="card-mac">
+          <div class="platform-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 1.01-2.87-.96.04-2.13.64-2.79 1.41-.58.68-1.1 1.74-1.01 2.79 1.08.08 2.17-.58 2.79-1.33z"/></svg></div>
+          <div class="platform-title">macOS</div>
+          <div class="platform-desc">Requires macOS 13 Ventura or newer. Apple Silicon build. Not notarized yet: right-click the app and choose Open on first launch.</div>
+          <div class="download-list">
+            <a class="download-link-btn highlight" id="dl-arm" href="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta3/anotherMessenger_1.0.0-beta3_aarch64.dmg"><span>Apple Silicon (M1 and newer)</span><span class="download-meta">.dmg</span></a>
+          </div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5 11 4.4v7H3zm9-1.2L21 3v8.4h-9zM3 12.6h8v7l-8-1.1zm9 0h9V21l-9-1.3z"/></svg></div>
+          <div class="platform-title">Windows</div>
+          <div class="platform-desc">Planned. Not available in this beta.</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>anotherMessenger</strong> &copy; 2026. Free tier available, Supporter license optional.</div>
+    <div class="footer-links">
+      <a href="https://github.com/jinkun1998/another.Messenger" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/jinkun1998/another.Messenger/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/jinkun1998/another.Messenger/issues" target="_blank" rel="noopener">Issues</a>
+      <a href="https://anotherteam.lemonsqueezy.com/" target="_blank" rel="noopener">Supporter</a>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const scrollLink = document.querySelector(".scroll-link");
+      const update = () => {
+        const s = window.scrollY > 300;
+        document.documentElement.classList.toggle("scrolled", s);
+        scrollLink.textContent = s ? "Back to top" : "Explore features";
+        scrollLink.setAttribute("href", s ? "#" : "#features");
+        const max = Math.max(document.documentElement.scrollHeight - innerHeight, 1);
+        document.documentElement.style.setProperty("--background-fade-opacity", String(Math.max(0.25, 0.9 - (scrollY / max) * 0.65)));
+      };
+      addEventListener("scroll", update, { passive: true });
+      update();
+
+      // Point download buttons at the newest release (prereleases included).
+      fetch("https://api.github.com/repos/jinkun1998/another.Messenger/releases?per_page=1")
+        .then(r => r.ok ? r.json() : [])
+        .then(([rel]) => {
+          const a = rel && (rel.assets || []).find(x => /\.dmg$/i.test(x.name));
+          if (!a) return;
+          document.getElementById("primary-download-btn").href = a.browser_download_url;
+          document.getElementById("dl-arm").href = a.browser_download_url;
+          document.getElementById("version-tag").textContent = rel.tag_name;
+          document.getElementById("release-badge").href = rel.html_url;
+        })
+        .catch(() => {});
+    })();
+  </script>
+</body>
+</html>
