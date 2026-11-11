@@ -1,6 +1,6 @@
 # anotherMessenger
 
-Multi-service chat client for macOS with isolated accounts, Touch ID lock, and 718+ service presets.
+Every chat in one place. Fast, private, protected by Touch ID.
 
 [![Website](https://img.shields.io/badge/Website-anotherMessenger-0a84ff?style=flat&logo=googlechrome&logoColor=white)](https://jinkun1998.github.io/another.Messenger/)
 [![Latest Release](https://img.shields.io/github/v/release/jinkun1998/another.Messenger?include_prereleases&color=2997ff)](https://github.com/jinkun1998/another.Messenger/releases)
