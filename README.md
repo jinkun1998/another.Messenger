@@ -1,4 +1,4 @@
-# another.Messenger
+# anotherMessenger
 
 Lightweight, multi-service chat client optimized for tablet/foldable dual-pane split-view and native IME compatibility.
 

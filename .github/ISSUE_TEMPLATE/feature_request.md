@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest an idea for another.Messenger
+about: Suggest an idea for anotherMessenger
 title: "[FEATURE] "
 labels: enhancement
 assignees: ''

@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Create a report to help improve another.Messenger
+about: Create a report to help improve anotherMessenger
 title: "[BUG] "
 labels: bug
 assignees: ''
