@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>another.Messenger</title>
+        <link>https://github.com/jinkun1998/another.Messenger-releases/releases</link>
+        <description>another.Messenger updates</description>
+        <item>
+            <title>0.1.0</title>
+            <pubDate>Tue, 10 Nov 2026 09:00:00 +0000</pubDate>
+            <link>https://github.com/jinkun1998/another.Messenger-releases/releases</link>
+            <sparkle:version>1</sparkle:version>
+            <sparkle:shortVersionString>0.1.0</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
+            <description><![CDATA[<h3>another.Messenger v0.1.0</h3><ul><li>718+ Rambox service catalog with isolated multi-account webview profiles.</li><li>Touch ID biometric app lock & master password protection.</li><li>Native macOS Liquid Glass UI with DND and system notification integration.</li></ul>]]></description>
+            <enclosure url="https://github.com/jinkun1998/another.Messenger-releases/releases/download/v0.1.0/another.Messenger.dmg" length="15000000" type="application/octet-stream"/>
+        </item>
+    </channel>
+</rss>
