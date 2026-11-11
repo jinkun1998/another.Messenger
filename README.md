@@ -8,7 +8,7 @@ Supports **Messenger**, **WhatsApp**, **Telegram**, and **Zalo** in a unified sh
 
 ## Downloads
 
-Download the latest binaries for your platform from the [Releases](https://github.com/jinkun1998/another.Messenger-releases/releases) page:
+Download the latest binaries for your platform from the [Releases](https://github.com/jinkun1998/another.Messenger/releases) page:
 
 - **macOS:** `.dmg` (Apple Silicon & Intel)
 - **Windows:** `.exe` (WebView2 / Chromium runtime)
@@ -27,8 +27,8 @@ Download the latest binaries for your platform from the [Releases](https://githu
 
 ## Issues & Support
 
-- Found a bug? [Open an Issue](https://github.com/jinkun1998/another.Messenger-releases/issues/new?template=bug_report.md).
-- Have a feature request? [Request a Feature](https://github.com/jinkun1998/another.Messenger-releases/issues/new?template=feature_request.md).
+- Found a bug? [Open an Issue](https://github.com/jinkun1998/another.Messenger/issues/new?template=bug_report.md).
+- Have a feature request? [Request a Feature](https://github.com/jinkun1998/another.Messenger/issues/new?template=feature_request.md).
 
 ---
 
