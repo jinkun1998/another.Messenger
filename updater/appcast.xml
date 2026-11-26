@@ -5,74 +5,14 @@
         <link>https://github.com/jinkun1998/another.Messenger/releases</link>
         <description>anotherMessenger updates</description>
         <item>
-            <title>1.0.0-beta7</title>
-            <pubDate>Thu, 26 Nov 2026 03:05:00 +0000</pubDate>
-            <link>https://github.com/jinkun1998/another.Messenger/releases</link>
-            <sparkle:version>7</sparkle:version>
-            <sparkle:shortVersionString>1.0.0-beta7</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h3>anotherMessenger v1.0.0-beta7</h3><ul><li>Isolated Messenger message row flex layout with CSS contain to fix wheel scroll freezes.</li></ul>]]></description>
-            <enclosure url="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta7/anotherMessenger_1.0.0-beta7_universal.dmg" length="7116529" type="application/octet-stream"/>
-        </item>
-        <item>
-            <title>1.0.0-beta6</title>
-            <pubDate>Thu, 26 Nov 2026 02:45:00 +0000</pubDate>
-            <link>https://github.com/jinkun1998/another.Messenger/releases</link>
-            <sparkle:version>6</sparkle:version>
-            <sparkle:shortVersionString>1.0.0-beta6</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h3>anotherMessenger v1.0.0-beta6</h3><ul><li>Replaced syncNav polling with event-driven history hooks for smoother chat switching.</li></ul>]]></description>
-            <enclosure url="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta6/anotherMessenger_1.0.0-beta6_universal.dmg" length="7116529" type="application/octet-stream"/>
-        </item>
-        <item>
-            <title>1.0.0-beta5</title>
-            <pubDate>Thu, 26 Nov 2026 02:00:00 +0000</pubDate>
-            <link>https://github.com/jinkun1998/another.Messenger/releases</link>
-            <sparkle:version>5</sparkle:version>
-            <sparkle:shortVersionString>1.0.0-beta5</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h3>anotherMessenger v1.0.0-beta5</h3><ul><li>Added Beta / Stable update channel selector in Settings.</li><li>Added license deactivation with automatic backup and restore of paid settings.</li><li>Fixed universal macOS (x86_64 + arm64) and Windows NSIS CI release builds.</li></ul>]]></description>
-            <enclosure url="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta5/anotherMessenger_1.0.0-beta5_universal.dmg" length="7116529" type="application/octet-stream"/>
-        </item>
-        <item>
-            <title>1.0.0-beta4</title>
-            <pubDate>Thu, 26 Nov 2026 01:15:00 +0000</pubDate>
-            <link>https://github.com/jinkun1998/another.Messenger/releases</link>
-            <sparkle:version>4</sparkle:version>
-            <sparkle:shortVersionString>1.0.0-beta4</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h3>anotherMessenger v1.0.0-beta4</h3><ul><li>Switched Messenger WebKit view to native Safari User-Agent to fix Vietnamese IME and fast typing lag.</li><li>Paused background polling during active typing and deferred badge DOM scans to requestIdleCallback.</li></ul>]]></description>
-            <enclosure url="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta4/anotherMessenger_1.0.0-beta4_aarch64.dmg" length="7116529" type="application/octet-stream"/>
-        </item>
-        <item>
-            <title>1.0.0-beta3</title>
-            <pubDate>Wed, 25 Nov 2026 09:00:00 +0000</pubDate>
-            <link>https://github.com/jinkun1998/another.Messenger/releases</link>
-            <sparkle:version>3</sparkle:version>
-            <sparkle:shortVersionString>1.0.0-beta3</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h3>anotherMessenger v1.0.0-beta3</h3><ul><li>Fixed Sparkle SUFeedURL and GitHub pre-release update detection.</li></ul>]]></description>
-            <enclosure url="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta3/anotherMessenger_1.0.0-beta3_aarch64.dmg" length="7116529" type="application/octet-stream"/>
-        </item>
-        <item>
-            <title>1.0.0-beta2</title>
-            <pubDate>Wed, 25 Nov 2026 07:30:00 +0000</pubDate>
-            <link>https://github.com/jinkun1998/another.Messenger/releases</link>
-            <sparkle:version>2</sparkle:version>
-            <sparkle:shortVersionString>1.0.0-beta2</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h3>anotherMessenger v1.0.0-beta2</h3><ul><li>Opens Polar Supporter checkout directly in system browser.</li><li>Signed macOS builds with hardened runtime.</li></ul>]]></description>
-            <enclosure url="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta2/anotherMessenger_1.0.0-beta2_aarch64.dmg" length="7116529" type="application/octet-stream"/>
-        </item>
-        <item>
             <title>1.0.0-beta1</title>
-            <pubDate>Wed, 25 Nov 2026 02:52:00 +0000</pubDate>
+            <pubDate>Thu, 26 Nov 2026 03:20:00 +0000</pubDate>
             <link>https://github.com/jinkun1998/another.Messenger/releases</link>
             <sparkle:version>1</sparkle:version>
             <sparkle:shortVersionString>1.0.0-beta1</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>13.0</sparkle:minimumSystemVersion>
-            <description><![CDATA[<h3>anotherMessenger v1.0.0-beta1</h3><ul><li>Native macOS notifications with click-to-navigate and lock-screen privacy.</li><li>Isolated notification chimes so macOS Now Playing is never hijacked.</li><li>Smooth IME input with zero-DOM-mutation WKScriptMessageHandler bridge.</li><li>Per-service mute toggle, drag-and-drop service reordering, and Polar.sh licensing.</li></ul>]]></description>
-            <enclosure url="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta1/anotherMessenger_1.0.0-beta1_aarch64.dmg" length="7116529" type="application/octet-stream"/>
+            <description><![CDATA[<h3>anotherMessenger v1.0.0-beta1</h3><ul><li>Built-in in-place DMG auto-downloader and installer with Beta / Stable channel selector.</li><li>Isolated Messenger message row flex layout with CSS contain to fix wheel scroll freezes.</li><li>Native macOS notifications with click-to-navigate, lock-screen privacy, and Now Playing isolation.</li><li>Smooth Vietnamese IME input with native Safari User-Agent and WKScriptMessageHandler bridge.</li><li>License deactivation with automatic backup and restore of paid settings (Polar.sh).</li></ul>]]></description>
+            <enclosure url="https://github.com/jinkun1998/another.Messenger/releases/download/v1.0.0-beta1/anotherMessenger_1.0.0-beta1_universal.dmg" length="7116529" type="application/octet-stream"/>
         </item>
     </channel>
 </rss>
